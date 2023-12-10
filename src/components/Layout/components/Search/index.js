@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
-import AccountItem from '~/components/AccountItem';
-import { Wrapper as PopperWrapper } from '~/components/Popper';
+import { useEffect, useRef, useState } from 'react';
 import HeadlessTippy from '@tippyjs/react/headless';
-import { SearchIcon } from '~/components/Icons';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import * as searchService from '~/apiServices/searchService';
+import AccountItem from '~/components/AccountItem';
+import { Wrapper as PopperWrapper } from '~/components/Popper';
+import { SearchIcon } from '~/components/Icons';
 import { useDebounce } from '~/components/Hooks';
 import styles from './Search.module.scss'
 
@@ -18,8 +20,8 @@ function Search() {
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
 
-    
-    const debounce = useDebounce(searchValue,500);
+
+    const debounce = useDebounce(searchValue, 500);
 
     const inputRef = useRef();
 
@@ -29,17 +31,30 @@ function Search() {
             return;
         }
 
-        setLoading(true);
+        const fetchApi = async () => {
+            setLoading(true);
 
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounce)}&type=less`)
-            .then(res => res.json())
-            .then(res => {
-                setSearchResult(res.data);
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoading(false);
-            })
+            const result = await searchService.search(debounce);
+            
+            setSearchResult(result);
+
+            setLoading(false);
+        }
+
+        fetchApi();
+
+        // fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounce)}&type=less`)
+        //     .then(res => res.json())
+        //     .then(res => {
+        //         setSearchResult(res.data);
+        //         setLoading(false);
+        //     })
+        //     .catch(() => {
+        //         setLoading(false);
+        //     })
+
+
+
     }, [debounce]);
 
     const handleClear = () => {
