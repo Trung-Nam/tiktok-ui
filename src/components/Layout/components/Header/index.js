@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleQuestion, faCoins, faEllipsisVertical, faGear, faKeyboard, faLanguage, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +12,7 @@ import Menu from '~/components/Popper/Menu';
 import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import Search from '../Search';
+import routesConfig from '~/config/routes'
 
 const cx = classNames.bind(styles);
 
@@ -90,12 +92,14 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
 
-                <div className={cx('logo')}>
-                    <img src={images.logo} alt="TIKTOK logo" />
-                </div>
+                <Link to={routesConfig.home} className={cx('logo-link')}>
+                    <div className={cx('logo')}>
+                        <img src={images.logo} alt="TIKTOK logo" />
+                    </div>
+                </Link>
 
                 <Search>
-                    
+
                 </Search>
 
                 <div className={cx('actions')}>
@@ -135,7 +139,7 @@ function Header() {
                                 className={cx('user-avatar')}
                                 alt='avatar'
                                 src='https://www.kkday.com/vi/blog/wp-content/uploads/chup-anh-dep-bang-dien-thoai-25.jpg'
-                                // fallback='https://didongviet.vn/dchannel/wp-content/uploads/2022/01/cute-didongviet.jpg'
+                            // fallback='https://didongviet.vn/dchannel/wp-content/uploads/2022/01/cute-didongviet.jpg'
 
                             />
                         ) : (

@@ -22,11 +22,17 @@
 }
 
 
-// .logo {
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-// }
-
-
+.logo-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 // actions
 .actions {
     display: flex;
@@ -63,7 +69,7 @@
     font-size: 1.4rem;
     font-weight: 600;
     color: var(--white);
-    font-family: 'ProximaNova', sans-serif;
+    font-family: var(--font-family);
     background-color: var(--primary);
 }
 
