@@ -4,11 +4,11 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import * as searchService from '~/apiServices/searchService';
+import * as searchService from '~/services/searchService';
 import AccountItem from '~/components/AccountItem';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import { SearchIcon } from '~/components/Icons';
-import { useDebounce } from '~/components/Hooks';
+import { useDebounce } from "~/hooks";
 import styles from './Search.module.scss'
 
 const cx = classNames.bind(styles);
